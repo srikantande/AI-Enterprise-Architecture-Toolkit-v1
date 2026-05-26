@@ -3,9 +3,6 @@
 > A comprehensive, TOGAF-aligned governance and architecture toolkit for enterprise AI portfolios — covering governance frameworks, architecture patterns, operational artefacts, decision records, and EA deliverables.
 
 ![Version](https://img.shields.io/badge/version-1.0-blue)
-![TOGAF](https://img.shields.io/badge/TOGAF-ADM%20Phases%20B%2CC%2CD%2CE-orange)
-![Standards](https://img.shields.io/badge/Standards-ISO%2FIEC%2042001%20%7C%20NIST%20AI%20RMF-green)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 ---
 
