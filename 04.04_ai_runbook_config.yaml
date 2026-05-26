@@ -1,0 +1,28 @@
+# File: `runbook_config.yaml`
+model:
+  versioning:
+    scheme: "semver"
+    required: true
+
+performance:
+  min_f1: 0.85
+  max_latency_ms: 100
+
+fairness:
+  max_demographic_parity_diff: 0.10
+
+explainability:
+  required_tools:
+    - "SHAP"
+    - "LIME"
+
+data:
+  privacy:
+    pii_masking: true
+    encryption:
+      at_rest: "AES-256"
+      in_transit: "TLS1.3"
+
+monitoring:
+  drift_detection_interval_hours: 24
+  alert_threshold: 0.15

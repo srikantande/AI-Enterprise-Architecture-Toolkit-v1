@@ -1,0 +1,136 @@
+governance:
+  framework:
+    name: "Enterprise AI Governance Framework"
+    version: "1.0"
+    effective_date: "2025-01-01"
+    next_review: "2025-07-01"
+    owner: "Enterprise Architect (TOGAF 10 Certified)"
+    approvals:
+      - role: "CTO"
+        status: "Approved"
+        date: "2025-01-05"
+      - role: "CISO"
+        status: "Approved"
+        date: "2025-01-08"
+      - role: "Data Protection Officer"
+        status: "Approved"
+        date: "2025-01-10"
+
+  council:
+    name: "AI Architecture Governance Council"
+    meeting_schedule:
+      weekly: "AI Sprint Review — Tue 10:00"
+      biweekly: "AI Design Authority — Thursday 14:00"
+      monthly: "Architecture Review Board — 1st Friday"
+      quarterly: "Strategic AI Roadmap — 1st day of quarter"
+
+  guardrails:
+    mandatory:
+      - id: "G-001"
+        title: "Data Sovereignty"
+        description: All PII/PHI data must remain in approved geographic regions
+        enforcement: "Automated via Org Policies + VPC-SC"
+        applies_to: "All AI workloads"
+        exception_process: "Data Governance Officer approval + Legal review"
+      
+      - id: "G-002"
+        title: "Model Transparency"
+        description: AI decisions affecting humans must be explainable
+        enforcement: "Model card review at Phase Gate 5"
+        applies_to: "All production AI"
+        tools: ["SHAP", "LIME", "Vertex Explainable AI", "SageMaker Clarify"]
+      
+      - id: "G-003"
+        title: "Human-in-the-Loop"
+        description: Human override required for Tier 3 AI decisions
+        enforcement: "Workflow approval gates in production"
+        applies_to: "Tier 3 — HR, financial, clinical decisions"
+      
+      - id: "G-004"
+        title: "Security & Access"
+        description: Least privilege IAM, VPC Service Controls, 90-day key rotation
+        enforcement: "Automated policy checks in CI/CD pipeline"
+        applies_to: "All AI endpoints and resources"
+      
+      - id: "G-005"
+        title: "Ethical AI"
+        description: No discriminatory, surveillance, or weapons-use AI
+        enforcement: "Pre-deployment ethical review + ongoing monitoring"
+        applies_to: "All customer-facing and Tier 3 AI"
+
+    advisory:
+      - id: "AG-001"
+        title: "Cost Optimization (FinOps)"
+        description: Use preemptible/spot instances, committed use discounts, monitor tokens
+      
+      - id: "AG-002"
+        title: "Reusability"
+        description: Leverage shared model registry, enterprise feature store
+      
+      - id: "AG-003"
+        title: "Observability"
+        description: Structured logs, custom metrics, model drift alerts
+
+  phase_gates:
+    G1:
+      name: "Ideation"
+      ea_check: "Architecture viability assessment required"
+      outputs: ["Business case", "Use case scorecard", "Initial data assessment"]
+    G2:
+      name: "Feasibility"
+      ea_check: "Technical architecture review"
+      outputs: ["PoC design", "Data quality report", "Target architecture draft"]
+    G3:
+      name: "Development"
+      ea_check: "Conformance to target architecture"
+      outputs: ["Trained model", "Pipeline code", "Test results"]
+    G4:
+      name: "Pre-Production"
+      ea_check: "Architecture compliance sign-off"
+      outputs: ["Security scan", "Bias test report", "DR plan"]
+    G5:
+      name: "Production"
+      ea_check: "Operational readiness review"
+      outputs: ["Deployed model", "Monitoring dashboard", "Runbook"]
+    G6:
+      name: "Retire"
+      ea_check: "Decommissioning approval"
+      outputs: ["Archived model", "Data archival completion", "Stakeholder notification"]
+
+  risk_tiers:
+    Tier1:
+      name: "Low Risk"
+      description: "Internal, advisory, non-personal data"
+      approval: "Project Lead"
+      examples: ["Internal doc summarization", "Code generation assistants"]
+    Tier2:
+      name: "Medium Risk"
+      description: "Customer-facing, aggregated data"
+      approval: "EA + Security Architect"
+      examples: ["Chatbot for product info", "Demand forecasting"]
+    Tier3:
+      name: "High Risk"
+      description: "PII/PHI, automated consequential decisions"
+      approval: "EA + Legal + C-Level"
+      examples: ["Loan approval AI", "Medical diagnosis assistant", "Hiring screen"]
+
+  tooling:
+    gcp:
+      primary_services:
+        - "Vertex AI (Gemini, Prediction, Training, Pipelines)"
+        - "BigQuery ML"
+        - "Cloud Composer"
+        - "Dataplex"
+        - "Model Armor"
+        - "Vertex AI Search"
+      cost_tools: ["Billing Export + Looker", "CUD/Committed Use Discounts"]
+      security_tools: ["VPC Service Controls", "Cloud DLP", "Secret Manager", "Binary Authorization"]
+    aws:
+      primary_services:
+        - "SageMaker (Training, Endpoints, Pipelines)"
+        - "Amazon Bedrock"
+        - "AWS Glue"
+        - "Amazon Kendra"
+        - "Bedrock Guardrails"
+      cost_tools: ["AWS Cost Explorer", "AWS Budgets", "Savings Plans"]
+      security_tools: ["VPC Endpoints", "AWS KMS", "AWS IAM Access Analyzer", "Macie"]

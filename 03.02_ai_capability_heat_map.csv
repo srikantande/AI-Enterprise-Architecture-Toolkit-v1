@@ -1,0 +1,13 @@
+Capabillity_ID,Capability_Name,Domain,Current_State_Score,Target_State_Score,Gap_Priority,EA_Action,Investment_Required,GCP_Services,AWS_Services,BU_1_Finance,BU_2_HR,BU_3_SupplyChain,BU_4_Marketing
+CAP-001,Foundation Model Access,AI Foundation,2,4,High,"Provision Vertex AI / Bedrock enterprise access",Medium,Vertex AI API,Amazon Bedrock,In Use,Planned,In Use,In Use
+CAP-002,Model Training & Tuning,ML Engineering,3,4,High,Establish MLOps platform with Vertex Training / SageMaker High,Vertex AI Training,SageMaker Training,Planned,Not Needed,In Use,Not Needed
+CAP-003,Model Serving & Inference,ML Engineering,2,4,High,Deploy Vertex AI Prediction / SageMaker Endpoints with autoscaling,Vertex AI Prediction,SageMaker Endpoints,In Use,Planned,Planned,In Use
+CAP-004,RAG Pipelines,GenAI Engineering,1,4,High,Implement enterprise RAG framework with vector DB,Vertex AI Search,OpenSearch+kendra,Planned,Planned,Not Needed,In Use
+CAP-005,Agentic AI Development,GenAI Engineering,1,3,Medium,Define agent framework standards with Guardrails,Vertex AI Agent Builder,Lex+Bedrock Agents,Not Needed,Planned,Planned,In Use
+CAP-006,Feature Store,Data Engineering,2,4,High,Deploy centralized Feature Store,Vertex AI Feature Store,SageMaker Feature Store,In Use,Not Needed,In Use,Not Needed
+CAP-007,Model Monitoring & Observability,MLOps,2,4,High,Enable automated drift detection and alerting,Vertex AI Model Monitoring,SageMaker Model Monitor,In Use,Not Needed,In Use,In Use
+CAP-008,AI Security & Guardrails,Security,1,4,High,"Implement prompt injection detection, PII redaction, VPC Service Controls",Model Armor,AWS WAF+Comprehend,Planned,In Use,In Use,In Use
+CAP-009,Data Pipeline Orchestration,Data Engineering,3,3,Medium,"Standardize on Composer / Step Functions, add quality checks",Cloud Composer,MWAA+Step Functions,In Use,In Use,In Use,In Use
+CAP-010,Cost Management (FinOps),Operations,2,4,High,"Implement token-level cost tracking, budgets, chargeback",Billing Export + Looker,AWS Cost Explorer+APIs,In Use,In Use,In Use,In Use
+CAP-011,Ethics & Bias Testing,Governance,1,4,High,"Establish fairness testing CI pipeline, annual ethics review",What-If Tool+Expl AI,SageMaker Clarify,In Use,In Use,Not Needed,In Use
+CAP-012,AI Architecture Governance,Governance,2,4,High,Roll out ADR process, Phase Gate reviews, Architecture Review Board,Shared Drive+Confluence,AWS CodeArtifact+Wiki,In Use,In Use,In Use,In Use

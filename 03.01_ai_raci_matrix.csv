@@ -1,0 +1,24 @@
+Activity,Enterprise_Architect(CA),AI_Architect,Cloud_Platform_Architect_GCP,Cloud_Platform_Architect_AWS,MLOps_Engineer,Data_Engineer,Security_Architect,Privacy_Legal_Officer,Business_Product_Owner,AI_Ethics_Reviewer
+Define AI Strategy (Phase A),A,R,R,C,I,C,I,I,R,R
+Business Architecture for AI (Phase B),A,R,C,C,I,I,C,C,R,R
+AI Information Architecture (Phase C),R,A,R,R,C,R,I,I,C,I
+AI Technology Architecture (Phase D),A,R,A,A,C,R,C,I,C,I
+AI Migration Planning (Phase E),A,R,C,C,R,R,C,I,R,I
+AI Implementation Governance (Phase F),A,R,R,R,C,R,A,R,I,I
+AI Change Management (Phase H),A,R,C,C,C,C,C,I,R,C
+AI Platform Selection (GCP vs AWS),A,R,A,A,C,C,C,C,C,I
+AI Data Pipeline Design,R,A,C,C,A,R,C,C,I,C
+AI Model Building & Training,C,C,C,C,A,R,I,I,R,R
+AI Model Deployment (CI/CD Pipeline),C,R,C,C,A,R,A,I,R,C
+AI Model Monitoring & Drift Detection,C,R,C,C,A,C,C,I,C,R
+AI Security Review & Penetration Test,C,R,C,C,C,C,A,R,C,R
+AI Cost Optimization (FinOps),C,R,R,R,C,C,I,C,A,R
+AI Ethics & Bias Assessment,C,C,C,C,C,C,C,I,R,A
+AI Architecture Review Board (ARB),A,R,R,R,C,C,C,I,R,R
+New AI Vendor Evaluation,A,C,C,C,C,C,A,R,R,C
+AI Incident Response,C,R,C,C,R,C,A,R,R,C
+AI Model Decommission,C,R,C,C,C,C,C,C,A,C
+AI Portfolio Roadmap,A,R,R,C,I,C,C,C,R,C
+AI Skills & Training,C,R,C,C,R,C,I,I,A,I
+
+Legend: R=Responsible, A=Accountable, C=Consulted, I=Informed

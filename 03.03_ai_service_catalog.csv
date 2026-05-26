@@ -1,0 +1,21 @@
+Service_ID,Service_Name,Cloud_Provider,Category,Data_Classification_Limit,Approval_Owner,Cacheable,PII_Handling,Cost_Model,Performance_SLA,Max_TPS,Notes
+SVC-001,Gemini 1.5 Pro (Vertex AI),GCP,GenAI — Large Language Model,Confidential,AI Architect,No,PII allowed with VPC-SC + DLP,$5/1M input tokens | $15/1M output tokens,< 10s p95,1000,RPC & REST
+SVC-002,Gemini 1.5 Flash (Vertex AI),GCP,GenAI — Large Language Model,Confidential,AI Architect,No,PII allowed with VPC-SC + DLP,$0.35/1M input tokens | $1.05/1M output tokens,< 3s p95,2000,Recommended for most use cases
+SVC-003,Claude 3.5 Sonnet (Bedrock),AWS,GenAI — Large Language Model,Confidential,Cloud Platform Architect AWS,No,PII allowed with VPC endpoints + Comprehend,$3/1M input tokens | $15/1M output tokens,< 8s p95,highest of 3 Bedrock models,Use for complex reasoning
+SVC-004,GPT-4o (Bedrock),AWS,GenAI — Large Language Model (Multi-modal),Confidential,Cloud Platform Architect AWS,No,PII allowed with VPC endpoints + Comprehend,$5/1M input tokens | $15/1M output tokens,< 8s p95,500,Can process images and text
+SVC-005,Veo (Vertex AI),GCP,GenAI — Video Generation,Internal Only,AI Architect,No,Not for PII,$0.50/sec generated,< 60s per video,5,Only internal marketing use
+SVC-006,Imagen 3 (Vertex AI),GCP,GenAI — Image Generation,Internal Only,AI Architect,No,Not for PII,$0.032/image,< 10s p95,10,Internal design teams
+SVC-007,Text Embedding Gecko (Vertex AI),GCP,GenAI — Embeddings,Confidential,Data Engineer,Yes — TTL 30 days,PII only hashed before embedding,$0.25/1M tokens,< 2s p95,1000,Vector store pairing required
+SVC-008,Cohere Embed v3 (Bedrock),AWS,GenAI — Embeddings,Confidential,Data Engineer,Yes — ElastiCache,PII only hashed,$0.25/1M tokens,< 2s p95,1000,Multi-language support
+SVC-009,Vertex AI Prediction,GCP,ML Serving,Confidential,MLOps Lead,PII allowed with CMEK,< 100ms p99,5000,Auto-scaling required
+SVC-010,SageMaker Real-Time Endpoint,AWS,ML Serving,Confidential,MLOps Lead,PII allowed with KMS,< 100ms p99,10000,A/B testing built-in
+SVC-011,Vertex AI Search (Enterprise),GCP,Retrieval / Search,Confidential,Data Architect,No,PII handled with CMEK,< 5s p95,1000,Provides managed embedding + LLM integration
+SVC-012,Model Armor (Vertex AI),GCP,AI Security / Guardrails,CUI,Security Architect,No,PII handled with CMEK,< 10ms p95,10000,Mandatory for all GenAI endpoints
+SVC-013,Vertex AI Pipelines,GCP,MLOps Pipeline,Confidential,MLOps Lead,No,PII handled with CMEK,N/A pipeline defined per hour,-,-,Terraform modules available
+SVC-014,Vertex AI Model Monitoring,GCP,MLOps Monitoring,Confidential,MLOps Lead,No,PII handled with CMEK,$0.008/features/1M,< 30 min detection,-,Automatic drift alerts
+SVC-015,Vertex AI Feature Store,GCP,Data Engineering for ML,Confidential,Data Engineer,PII handled with CMEK,$8/hour online serving node,< 100ms p95,100,Mandatory for production ML
+SVC-016,Vertex AI Agent Builder,GCP,Conversational AI / Agents,Confidential,Business Product Owner,PII not allowed without VPC-SC + DLP,$0.005/request,< 3s p95,500,Beta — suited for customer-facing
+SVC-017,Bedrock Agents,AWS,Conversational AI / Agents,Confidential,Business Product Owner,PII allowed with Comprehend,$0.005/step,< 5s p95,500,Multi-step agent workflows
+SVC-018,SageMaker Clarify,AWS,Fairness / Explainability,Confidential,AI Ethics Reviewer,PII handled with KMS,N/A per model run,-,-,Supports SHAP + Partial Dependence Plots
+SVC-019,Vertex Explainable AI,GCP,Fairness / Explainability,Confidential,AI Ethics Reviewer,PII handled with CMEK,N/A per model run,-,-,Integrated with most Vertex AI models
+SVC-020,Vertex AI Workbench (Managed Notebooks),GCP,Data Science Workspace,Confidential,AI Architect,Allowed with CMEK + VPC-SC,$0.45/hr per instance,-,N/A,Jupyter-based, default for EDA

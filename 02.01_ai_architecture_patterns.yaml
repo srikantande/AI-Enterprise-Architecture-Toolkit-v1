@@ -1,0 +1,205 @@
+metadata:
+  title: "Enterprise AI Architecture Pattern Catalog"
+  version: "1.0"
+  author: "Enterprise Architect (TOGAF 10, GCP PCA)"
+  date: "2025-01-25"
+  togaf_phase: "Phase C + D"
+  classification: "Internal Use"
+
+standards_reference:
+  - "TOGAF 10 Standard"
+  - "NIST AI Risk Management Framework"
+  - "ISO/IEC 42001:2023 — AI Management Systems"
+  - "EU AI Act 2024"
+  - "Google Cloud Architecture Framework — AI/ML"
+  - "AWS Well-Architected Framework — AI Lens"
+
+governance:
+  approval_body: "AI Architecture Review Board (AARB)"
+  review_frequency: "Quarterly"
+  next_review: "2025-04-25"
+  policy_id: "POL-AI-008"
+
+patterns:
+  - pattern_id: "PAT-001"
+    name: "RAG with Vertex AI Search"
+    category: "Retrieval-Augmented Generation"
+    use_case: "Enterprise knowledge base Q&A"
+    provider: "GCP"
+    complexity: "medium"
+    services:
+      - name: "Vertex AI Search"
+        role: "Vector index + semantic search"
+      - name: "Gemini 1.5 Pro"
+        role: "Answer generation with context"
+      - name: "Cloud Functions"
+        role: "Pre/post processing orchestration"
+      - name: "BigQuery"
+        role: "Source data / structured context"
+    data_flow:
+      - step: 1
+        action: "Ingest documents into Vertex AI Search index"
+        service: "Vertex AI Search"
+      - step: 2
+        action: "User submits question via Cloud Functions"
+        service: "Cloud Functions"
+      - step: 3
+        action: "Query embedding generated"
+        service: "Vertex AI"
+      - step: 4
+        action: "Top-K documents retrieved"
+        service: "Vertex AI Search"
+      - step: 5
+        action: "Context injected into prompt"
+        service: "Cloud Functions"
+      - step: 6
+        action: "Gemini generates answer"
+        service: "Vertex AI"
+      - step: 7
+        action: "Response returned with citations"
+        service: "Cloud Functions"
+    guardrails:
+      - "G-001: Data residency within approved regions"
+      - "G-004: VPC-SC for data perimeter"
+      - "G-005: Output filtering for harmful content"
+    estimated_cost: "$2,000–$10,000/month (scale-dependent)"
+    rto: "4 hours"
+    rpo: "1 hour"
+
+  - pattern_id: "PAT-002"
+    name: "RAG with Amazon Bedrock + OpenSearch"
+    category: "Retrieval-Augmented Generation"
+    use_case: "Enterprise Q&A with OpenSearch vector store"
+    provider: "AWS"
+    complexity: "medium"
+    services:
+      - name: "Amazon Bedrock"
+        role: "LLM inference (Claude, Titan)"
+      - name: "OpenSearch Serverless"
+        role: "Vector database"
+      - name: "AWS Kendra"
+        role: "Optional — intelligent enterprise search"
+      - name: "Lambda"
+        role: "Orchestration layer"
+      - name: "S3"
+        role: "Document storage"
+    guardrails:
+      - "G-001: VPC endpoints required"
+      - "G-004: KMS encryption, IAM least privilege"
+    estimated_cost: "$3,000–$12,000/month"
+
+  - pattern_id: "PAT-003"
+    name: "Real-time ML Prediction (Fraud Detection)"
+    category: "Real-time ML"
+    use_case: "Real-time fraud scoring"
+    provider: "GCP"
+    complexity: "high"
+    services:
+      - name: "Vertex AI Prediction"
+        role: "Model serving endpoint"
+      - name: "Pub/Sub"
+        role: "Transaction event ingestion"
+      - name: "Cloud Run"
+        role: "Validation + preprocessing"
+      - name: "BigQuery"
+        role: "Historical data + audit"
+    performance_sla:
+      p99_latency: "< 100ms"
+      max_instances: 100
+      auto_scaling: true
+    guardrails:
+      - "G-001: CMEK encryption"
+      - "G-003: Human override for high-risk decisions"
+      - "AG-003: Latency and drift monitoring"
+    rto: "0 (active-active)"
+    rpo: "0"
+
+  - pattern_id: "PAT-005"
+    name: "MLOps Pipeline — Vertex AI"
+    category: "MLOps"
+    use_case: "End-to-end ML lifecycle"
+    provider: "GCP"
+    complexity: "high"
+    services:
+      - name: "Vertex AI Pipelines"
+        role: "Orchestrated ML workflow"
+      - name: "Vertex AI Training"
+        role: "Model training (custom & AutoML)"
+      - name: "Vertex AI Model Registry"
+        role: "Model versioning and metadata"
+      - name: "Artifact Registry"
+        role: "Pipeline container images"
+      - name: "Cloud Build"
+        role: "CI/CD triggers"
+      - name: "Cloud Monitoring"
+        role: "Pipeline observability"
+    guardrails:
+      - "G-004: VPC-SC perimeter around ML metadata"
+      - "POL-AI-003: IaC required (Terraform)"
+      - "POL-AI-001: Model cards mandatory"
+
+  - pattern_id: "PAT-007"
+    name: "GenAI Agent with Guardrails"
+    category: "Conversational AI"
+    use_case: "Customer support chatbot with safety controls"
+    provider: "GCP"
+    complexity: "medium"
+    services:
+      - name: "Dialogflow CX"
+        role: "Intent detection + conversation management"
+      - name: "Vertex AI Gemini"
+        role: "Response generation"
+      - name: "Model Armor"
+        role: "Prompt + response safety filtering"
+      - name: "Cloud Functions"
+        role: "Business logic + API integrations"
+      - name: "Firestore"
+        role: "Conversation context + session state"
+    guardrails:
+      - "G-003: Human escalation path mandatory"
+      - "G-004: Model Armor filters for PII, violence, hate"
+      - "G-005: Customer-facing requires ethical AI review"
+    escalation:
+      type: "Human agent handoff"
+      trigger: "Confidence < 0.7 OR user requests agent"
+      timeout: "30 seconds"
+
+  - pattern_id: "PAT-012"
+    name: "Hybrid AI + Legacy Middleware Integration"
+    category: "Hybrid Integration"
+    use_case: "LLM summarization integrated with on-premise ERP/middleware"
+    provider: "GCP"
+    complexity: "high"
+    services:
+      - name: "Cloud Interconnect"
+        role: "Secure GCP ↔ on-premise connectivity"
+      - name: "Vertex AI"
+        role: "LLM inference (Gemini)"
+      - name: "Apigee"
+        role: "API management + facade for legacy systems"
+      - name: "Cloud Run"
+        role: "Message transformation + orchestration"
+      - name: "GKE (JBoss / IBM WAS workloads)"
+        role: "Legacy middleware containerization"
+    integration_pattern:
+      type: "API facade via Apigee"
+      protocol: "HTTPS / REST"
+      on_premise_consumption: "HTTPS via Interconnect"
+    guardrails:
+      - "G-001: All PII stays within approved zones"
+      - "G-004: Apigee handles auth, rate limiting, WAF"
+      - "AG-002: Reusable across all ERP integrations"
+    notes: "Apigee acts as the single PAI facade. LLM calls happen server-side only. No direct from-premise to Vertex AI. All traffic logged."
+
+architecture_standards:
+  mandatory:
+    - id: "STD-AI-001"
+      description: "All GenAI traffic must traverse VPC-SC or VPC endpoints"
+    - id: "STD-AI-002"
+      description: "CMEK encryption for all AI storage (model, data, logs)"
+    - id: "STD-AI-003"
+      description: "IaC (Terraform/CDK) required for all infrastructure"
+    - id: "STD-AI-004"
+      description: "Structured logging to Cloud Logging/CloudWatch with 2yr retention"
+    - id: "STD-AI-005"
+      description: "Cost allocation tags mandatory (project, BU, environment)"
