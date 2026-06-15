@@ -311,4 +311,4 @@ Contributions are welcome. Please follow these guidelines:
 
 ---
 
-*AI Enterprise Architecture Toolkit v1.0 — Enterprise Architecture AI Portfolio — January 2025*
+*AI Enterprise Architecture Toolkit v1.0 — Enterprise Architecture AI Portfolio — June 2026*
